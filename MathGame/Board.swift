@@ -65,12 +65,13 @@ class Board: ObservableObject {
             userCells[selectedRow][selectedCol] = 0
         } else {
             userCells[selectedRow][selectedCol] = number
-            
+            // if there's a cell to the right, move one column to the right:
             if selectedCol < exampleCells[0].count - 1 {
                 selectedCol += 1
+            // if there's a cell below move down one row:
             } else if selectedRow < exampleCells.count - 1 {
                 selectedRow += 1
-                selectedCol = 0 
+                selectedCol = 0
             }
         }
     }
