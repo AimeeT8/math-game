@@ -28,10 +28,15 @@ struct ContentView: View {
                                     
                                 let selected = row == board.selectedRow && col == board.selectedCol
                                 
+                                let userValue = userRow[col] == 0 ? "" : String(userRow[col])
+                                
                                 CellView(number: userRow[col], isSelected: selected) {
                                     board.selectedRow = row
                                     board.selectedCol = col
                                 }
+                                .accessibilityValue(userValue)
+                                .accessibilityLabel("Row \(row) column \(col)")
+                                .accessibilityAddTraits(selected ? .isSelected : .isButton)
                             }
                             
                             let exampleSum = sum(forRow: exampleRow)
@@ -103,6 +108,7 @@ struct ContentView: View {
                     Text("You solved the board correctly - good job!")
                 }
             }
+            .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         }
     }
     
