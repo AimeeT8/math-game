@@ -19,6 +19,7 @@ class Board: ObservableObject {
     @Published var selectedRow = 0
     @Published var selectedCol = 0
     
+    // Call create function with a default init
     init(_ difficulty: Difficulty) {
         create(difficulty)
     }
@@ -48,7 +49,7 @@ class Board: ObservableObject {
             maxNumber = 8
         
         }
-        
+        // convert the range into an array of arrays with each item inside being a random int
         exampleCells = (0..<size).map { _ in
             (0..<size).map { _ in
                 Int.random(in: 1...maxNumber)
