@@ -19,6 +19,29 @@ class Board: ObservableObject {
     @Published var selectedRow = 0
     @Published var selectedCol = 0
     
+    var isSolved: Bool {
+        // Check the rows
+        for i in 0..<exampleCells.count {
+            let exampleSum = exampleCells[i].reduce(0, +)
+            let userSum = userCells[i].reduce(0, +)
+            if exampleSum != userSum { return false }
+        }
+        // Check the columns
+        for i in 0..<exampleCells[0].count {
+            let exampleSum = exampleCells.reduce(0) { $0 + $1[i] }
+            let userSum = userCells.reduce(0) { $0 + $1[i] }
+            if exampleSum != userSum { return false }
+        }
+        // check if there are remaining 0's in the cells
+        for row in userCells {
+            for col in row {
+                if col == 0 { return false }
+            }
+        }
+        // this is a valid solved board:
+        return true
+    }
+    
     // Call create function with a default init
     init(_ difficulty: Difficulty) {
         create(difficulty)
