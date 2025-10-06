@@ -39,6 +39,8 @@ struct ContentView: View {
                             
                             SumView(number: exampleSum)
                                 .foregroundColor(exampleSum == userSum ? .primary : .red)
+                                .accessibilityLabel("Row \(row + 1) sum: \(exampleSum)")
+                                .accessibilityHint(exampleSum == userSum ? "Correct" : "Incorrect")
                         }
                     }
                     
@@ -49,6 +51,8 @@ struct ContentView: View {
                             
                             SumView(number: exampleSum)
                                 .foregroundColor(exampleSum == userSum ? .primary : .red)
+                                .accessibilityLabel("Column \(col + 1) sum: \(exampleSum)")
+                                .accessibilityHint(exampleSum == userSum ? "Correct" : "Incorrect")
                         }
                     }
                 }
@@ -61,6 +65,8 @@ struct ContentView: View {
                         Button(String(i)) {
                             board.enter(i)
                         }
+                        .accessibilityLabel("Enter \(i)")
+                        .accessibilityHint(board.hint(for: i))
                         .frame(maxWidth: .infinity)
                         .font(.largeTitle)
                     }
@@ -92,6 +98,10 @@ struct ContentView: View {
                 }
                 
                 Button("Cancel", role: .cancel) { }
+            } message: {
+                if board.isSolved {
+                    Text("You solved the board correctly - good job!")
+                }
             }
         }
     }
