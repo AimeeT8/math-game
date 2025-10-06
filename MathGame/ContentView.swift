@@ -47,6 +47,7 @@ struct ContentView: View {
                         .font(.largeTitle)
                     }
                 }
+                .padding()
             }
             .navigationTitle("Math-Game")
         }
