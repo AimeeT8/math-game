@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject private var board = Board(.medium)
+    @State private var isGameOver = false
     
     
     var body: some View {
@@ -67,6 +68,22 @@ struct ContentView: View {
                 .padding()
             }
             .navigationTitle("Math-Game")
+            .toolbar {
+                Button {
+                    isGameOver = true
+                } label: {
+                    Label("Start a new game", systemImage: "plus")
+                }
+            }
+            .alert("Start a new game", isPresented: $isGameOver) {
+                ForEach(Difficulty.allCases, id:\.self) { difficulty in
+                    Button(String(describing: difficulty).capitalized) {
+                        startGame(difficulty)
+                    }
+                }
+                
+                Button("Cancel", role: .cancel) { }
+            }
         }
     }
     
@@ -78,6 +95,12 @@ struct ContentView: View {
         cells.reduce(0) {
             $0 + $1[col]
         }
+    }
+   
+    
+    func startGame(_ difficulty: Difficulty) {
+        isGameOver = false
+        board.create(difficulty)
     }
 }
 
