@@ -108,6 +108,7 @@ struct ContentView: View {
                     Text("You solved the board correctly - good job!")
                 }
             }
+            // Don't let any font get bigger than xxxlarge otherwise clip it.
             .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         }
     }
